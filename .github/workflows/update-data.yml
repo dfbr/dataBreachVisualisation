@@ -48,6 +48,7 @@ jobs:
           git add docs/data_wells.json
           if ! git diff --cached --quiet; then
             git commit -m "Update data_wells.json ($(date -u +%Y-%m-%d))"
+            git pull --rebase origin main
             git push
           else
             echo "No data changes to commit."
