@@ -4,31 +4,397 @@
 <meta charset="utf-8">
 <title>DeHashed Data Wells Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 <style>
+  :root { color-scheme: light; }
   body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; margin: 0; padding: 0 20px 40px; background: #f7f7f9; color: #222; }
-  h1 { padding-top: 30px; }
+  h1 { padding-top: 30px; margin-bottom: 4px; }
+  .generated { color: #888; font-size: 13px; margin-top: 0; }
   .summary { display: flex; gap: 30px; flex-wrap: wrap; margin: 20px 0; }
   .stat { background: white; border-radius: 8px; padding: 16px 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
   .stat .value { display: block; font-size: 28px; font-weight: 700; }
   .stat .label { display: block; font-size: 13px; color: #666; }
-  .generated { color: #888; font-size: 13px; }
-  .chart { background: white; border-radius: 8px; padding: 10px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 20px; margin-bottom: 30px; }
+  .chart { background: white; border-radius: 8px; padding: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .chart.wide { grid-column: 1 / -1; }
+  section.table-section { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .controls { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+  .controls input[type="text"] { padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; min-width: 220px; }
+  .controls select { padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; }
+  .controls label.checkbox { display: flex; align-items: center; gap: 6px; font-size: 14px; }
+  .controls .count { margin-left: auto; font-size: 13px; color: #666; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #eee; vertical-align: top; }
+  th { cursor: pointer; user-select: none; white-space: nowrap; background: #fafafa; position: sticky; top: 0; }
+  th.sorted-asc::after { content: " \25B2"; }
+  th.sorted-desc::after { content: " \25BC"; }
+  td.name { max-width: 260px; }
+  td.description { max-width: 420px; color: #444; }
+  tr.sensitive td.name { color: #b00020; font-weight: 600; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+  .badge.yes { background: #fdecea; color: #b00020; }
+  .badge.no { background: #eef6ec; color: #2e7d32; }
+  .table-wrap { max-height: 640px; overflow: auto; border: 1px solid #eee; border-radius: 6px; }
+  .pagination { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: 14px; }
+  .pagination button { padding: 6px 12px; border: 1px solid #ccc; border-radius: 6px; background: white; cursor: pointer; }
+  .pagination button:disabled { opacity: 0.4; cursor: default; }
+  .status { padding: 40px; text-align: center; color: #666; }
 </style>
 </head>
 <body>
 <h1>DeHashed Data Wells Dashboard</h1>
+<p class="generated" id="generated-note">Loading data_wells.json&hellip;</p>
 
-    <div class="summary">
-      <div class="stat"><span class="value">24,051</span><span class="label">Data Wells</span></div>
-      <div class="stat"><span class="value">24,130,333,271</span><span class="label">Total Records Exposed</span></div>
-      <div class="stat"><span class="value">0.1%</span><span class="label">Marked Sensitive</span></div>
+<div id="app">
+  <div class="status" id="status">Loading&hellip;</div>
+
+  <div class="summary" id="summary" hidden></div>
+
+  <div class="charts" id="charts" hidden>
+    <div class="chart wide" id="chart-timeline"></div>
+    <div class="chart" id="chart-top-breaches"></div>
+    <div class="chart" id="chart-sensitivity"></div>
+    <div class="chart wide" id="chart-data-types"></div>
+  </div>
+
+  <section class="table-section" id="table-section" hidden>
+    <div class="controls">
+      <input type="text" id="search-input" placeholder="Search by breach name&hellip;">
+      <select id="data-type-filter">
+        <option value="">All data types</option>
+      </select>
+      <label class="checkbox"><input type="checkbox" id="sensitive-only"> Sensitive only</label>
+      <span class="count" id="result-count"></span>
     </div>
-    <p class="generated">Last updated: 2026-09-24 10:40 UTC</p>
-    
-<div class="chart"><div style="height:650px; width:100%;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.1.1.min.js" integrity="sha256-O24V1F27f8pb0glCkelh3cVHLNiHAJ5gCaVtq2aNch8=" crossorigin="anonymous"></script>                <div id="a3722386-c589-4d79-8675-8076e371ea00" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("a3722386-c589-4d79-8675-8076e371ea00")) {                    Plotly.newPlot(                        "a3722386-c589-4d79-8675-8076e371ea00",                        [{"marker":{"color":["#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4"]},"orientation":"h","text":{"dtype":"f8","bdata":"AAAAytsgqUEAAADw9NGpQQAAAKD6q6pBAAAA7Fwgq0EAAABKY8yrQQAAANgr0qxBAAAA3l0lsEEAAABO\u002fSixQQAAAPO32LNBAAAASJt1tEEAAACkHni1QQAAAGEPgrhBAAAATU\u002fAwEEAAIB1QnTBQQAAALiwc8VBAACANp\u002fbx0EAAABlak3IQQAAAGyCt8lBAADAn5z95EEAADBLz9L2QQ=="},"textposition":"outside","texttemplate":"%{text:,}","x":[210791909,216595064,223739216,227552886,233189797,241767916,270884318,287898958,332969971,343251784,360193700,411176801,562077338,585663723,719806832,800538221,815453386,862913752,2817320190,6126630067],"y":["Luxottica","Zynga.com","Serasa Experian","Unknown Leads Database","Twitter.com","Acuity","Wattpad.com","NetEase","SocRadar.io","Naz.API","Myspace.com","LinkedIn","AntiPublic","Bureau van Dijk","QQ.com","Exploit.in","CDEK","Facebook","Collections","ALIEN TXTBASE"],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05}}},"margin":{"l":10,"r":10,"t":50,"b":10},"title":{"text":"Top 20 Breaches by Records Exposed"},"xaxis":{"title":{"text":"Records"}},"yaxis":{"title":{}},"height":650},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div></div>
-<div class="chart"><div style="height:450px; width:100%;">                            <div id="2cf2c656-ced0-4766-8687-c75acdce3761" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("2cf2c656-ced0-4766-8687-c75acdce3761")) {                    Plotly.newPlot(                        "2cf2c656-ced0-4766-8687-c75acdce3761",                        [{"marker":{"color":"#1f77b4"},"name":"Breach Count","x":{"dtype":"i4","bdata":"bAcAANcHAADYBwAA2QcAANsHAADcBwAA3QcAAN4HAADfBwAA4AcAAOEHAADiBwAA4wcAAOQHAADlBwAA5gcAAOcHAADoBwAA6QcAAA=="},"y":{"dtype":"i2","bdata":"AgABAAEAAQALAAsACwAJAA8AIQASAB8AJgDsXBYAGQAOAA8ABQA="},"type":"bar","xaxis":"x","yaxis":"y"},{"marker":{"color":"#d62728"},"mode":"lines+markers","name":"Records Exposed","x":{"dtype":"i4","bdata":"bAcAANcHAADYBwAA2QcAANsHAADcBwAA3QcAAN4HAADfBwAA4AcAAOEHAADiBwAA4wcAAOQHAADlBwAA5gcAAOcHAADoBwAA6QcAAA=="},"y":[430370061,2145476,360193700,49611710,182850499,657414599,592318750,153598762,115099947,1975916368,500887868,975139061,5049382868,2828180722,1481516064,1189169896,456137200,757811584,6372588136],"type":"scatter","xaxis":"x","yaxis":"y2"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05}}},"xaxis":{"anchor":"y","domain":[0.0,0.94]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Breach Count"}},"yaxis2":{"anchor":"x","overlaying":"y","side":"right","title":{"text":"Records Exposed"}},"margin":{"l":10,"r":10,"t":50,"b":10},"title":{"text":"Breaches and Records Exposed by Year"},"height":450},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div></div>
-<div class="chart"><div style="height:420px; width:100%;">                            <div id="5bb32956-613c-4ac6-b254-e3d93f1fd637" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("5bb32956-613c-4ac6-b254-e3d93f1fd637")) {                    Plotly.newPlot(                        "5bb32956-613c-4ac6-b254-e3d93f1fd637",                        [{"hole":0.4,"labels":["Not Sensitive","Sensitive"],"marker":{"colors":["#1f77b4","#d62728"]},"values":{"dtype":"i2","bdata":"4l0RAA=="},"type":"pie"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05}}},"margin":{"l":10,"r":10,"t":50,"b":10},"title":{"text":"Sensitive vs. Non-Sensitive Breaches"},"height":420},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div></div>
-<div class="chart"><div style="height:650px; width:100%;">                            <div id="12d932bb-6054-4ad7-84e2-e0dfcb7c44e7" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("12d932bb-6054-4ad7-84e2-e0dfcb7c44e7")) {                    Plotly.newPlot(                        "12d932bb-6054-4ad7-84e2-e0dfcb7c44e7",                        [{"marker":{"color":"#2ca02c"},"orientation":"h","x":[42,61,62,68,71,72,75,80,91,95,99,99,103,103,128,196,1663,2058,22618,24032],"y":["address_street_number","address_street_number_name","url","address_state","address_zip","social","address_country","address_city","birthdate_full","name_full","hashed_password_with_salt","name_last","ip_address","name_first","phone_number","username","hashed_password_salt_only","hashed_password","password","email"],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05}}},"margin":{"l":10,"r":10,"t":50,"b":10},"title":{"text":"Most Common Exposed Data Types (Top 20)"},"xaxis":{"title":{"text":"Number of Breaches"}},"height":650},                        {"displaylogo": false, "responsive": true}                    )                };            </script>        </div></div>
+    <div class="table-wrap">
+      <table id="breaches-table">
+        <thead>
+          <tr>
+            <th data-key="name">Name</th>
+            <th data-key="date">Date</th>
+            <th data-key="records">Records</th>
+            <th data-key="is_sensitive">Sensitive</th>
+            <th data-key="data">Data Types</th>
+            <th data-key="description">Description</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <button id="prev-page">Prev</button>
+      <span id="page-info"></span>
+      <button id="next-page">Next</button>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const DATA_URL = "data_wells.json";
+  const PAGE_SIZE = 50;
+
+  const state = {
+    rows: [],
+    filtered: [],
+    sortKey: "records",
+    sortDir: "desc",
+    page: 1,
+    search: "",
+    dataType: "",
+    sensitiveOnly: false,
+  };
+
+  const els = {
+    status: document.getElementById("status"),
+    summary: document.getElementById("summary"),
+    charts: document.getElementById("charts"),
+    tableSection: document.getElementById("table-section"),
+    tableBody: document.getElementById("table-body"),
+    resultCount: document.getElementById("result-count"),
+    searchInput: document.getElementById("search-input"),
+    dataTypeFilter: document.getElementById("data-type-filter"),
+    sensitiveOnly: document.getElementById("sensitive-only"),
+    prevPage: document.getElementById("prev-page"),
+    nextPage: document.getElementById("next-page"),
+    pageInfo: document.getElementById("page-info"),
+    generatedNote: document.getElementById("generated-note"),
+  };
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+    }[c]));
+  }
+
+  function splitDataTypes(value) {
+    return String(value || "")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+
+  function loadData() {
+    fetch(DATA_URL)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        state.rows = data.map((row) => ({
+          ...row,
+          records: Number(row.records) || 0,
+          is_sensitive: Boolean(row.is_sensitive),
+          _year: (row.date && row.date.slice(0, 4)) || null,
+        }));
+        onDataLoaded();
+      })
+      .catch((err) => {
+        els.status.textContent = `Failed to load ${DATA_URL}: ${err.message}`;
+      });
+  }
+
+  function onDataLoaded() {
+    els.status.hidden = true;
+    els.summary.hidden = false;
+    els.charts.hidden = false;
+    els.tableSection.hidden = false;
+    els.generatedNote.textContent = `Loaded ${state.rows.length.toLocaleString()} data wells`;
+
+    renderSummary();
+    renderCharts();
+    populateDataTypeFilter();
+    applyFilters();
+  }
+
+  function renderSummary() {
+    const totalBreaches = state.rows.length;
+    const totalRecords = state.rows.reduce((sum, r) => sum + r.records, 0);
+    const sensitiveCount = state.rows.filter((r) => r.is_sensitive).length;
+    const sensitivePct = totalBreaches ? (100 * sensitiveCount) / totalBreaches : 0;
+
+    els.summary.innerHTML = `
+      <div class="stat"><span class="value">${totalBreaches.toLocaleString()}</span><span class="label">Data Wells</span></div>
+      <div class="stat"><span class="value">${totalRecords.toLocaleString()}</span><span class="label">Total Records Exposed</span></div>
+      <div class="stat"><span class="value">${sensitivePct.toFixed(1)}%</span><span class="label">Marked Sensitive</span></div>
+    `;
+  }
+
+  function renderCharts() {
+    const config = { displaylogo: false, responsive: true };
+
+    // Top 20 breaches by records
+    const top = [...state.rows].sort((a, b) => b.records - a.records).slice(0, 20).reverse();
+    Plotly.newPlot(
+      "chart-top-breaches",
+      [{
+        type: "bar",
+        orientation: "h",
+        x: top.map((r) => r.records),
+        y: top.map((r) => r.name),
+        marker: { color: top.map((r) => (r.is_sensitive ? "#d62728" : "#1f77b4")) },
+        text: top.map((r) => r.records.toLocaleString()),
+        textposition: "outside",
+      }],
+      { title: "Top 20 Breaches by Records Exposed", margin: { l: 10, r: 10, t: 50, b: 10 }, height: 650 },
+      config
+    );
+
+    // Breaches & records per year
+    const byYear = new Map();
+    for (const r of state.rows) {
+      if (!r._year) continue;
+      const entry = byYear.get(r._year) || { breaches: 0, records: 0 };
+      entry.breaches += 1;
+      entry.records += r.records;
+      byYear.set(r._year, entry);
+    }
+    const years = [...byYear.keys()].sort();
+    Plotly.newPlot(
+      "chart-timeline",
+      [
+        { type: "bar", name: "Breach Count", x: years, y: years.map((y) => byYear.get(y).breaches), marker: { color: "#1f77b4" } },
+        { type: "scatter", mode: "lines+markers", name: "Records Exposed", x: years, y: years.map((y) => byYear.get(y).records), yaxis: "y2", marker: { color: "#d62728" } },
+      ],
+      {
+        title: "Breaches and Records Exposed by Year",
+        margin: { l: 10, r: 10, t: 50, b: 10 },
+        height: 420,
+        yaxis: { title: "Breach Count" },
+        yaxis2: { title: "Records Exposed", overlaying: "y", side: "right" },
+      },
+      config
+    );
+
+    // Sensitivity split
+    const sensitiveCount = state.rows.filter((r) => r.is_sensitive).length;
+    const notSensitiveCount = state.rows.length - sensitiveCount;
+    Plotly.newPlot(
+      "chart-sensitivity",
+      [{
+        type: "pie",
+        labels: ["Sensitive", "Not Sensitive"],
+        values: [sensitiveCount, notSensitiveCount],
+        marker: { colors: ["#d62728", "#1f77b4"] },
+        hole: 0.4,
+      }],
+      { title: "Sensitive vs. Non-Sensitive Breaches", margin: { l: 10, r: 10, t: 50, b: 10 }, height: 420 },
+      config
+    );
+
+    // Most common exposed data types
+    const counts = new Map();
+    for (const r of state.rows) {
+      for (const field of splitDataTypes(r.data)) {
+        counts.set(field, (counts.get(field) || 0) + 1);
+      }
+    }
+    const topTypes = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20).reverse();
+    Plotly.newPlot(
+      "chart-data-types",
+      [{
+        type: "bar",
+        orientation: "h",
+        x: topTypes.map(([, count]) => count),
+        y: topTypes.map(([label]) => label),
+        marker: { color: "#2ca02c" },
+      }],
+      { title: "Most Common Exposed Data Types (Top 20)", margin: { l: 10, r: 10, t: 50, b: 10 }, height: 650 },
+      config
+    );
+  }
+
+  function populateDataTypeFilter() {
+    const types = new Set();
+    for (const r of state.rows) {
+      for (const field of splitDataTypes(r.data)) types.add(field);
+    }
+    const sorted = [...types].sort((a, b) => a.localeCompare(b));
+    for (const type of sorted) {
+      const opt = document.createElement("option");
+      opt.value = type;
+      opt.textContent = type;
+      els.dataTypeFilter.appendChild(opt);
+    }
+  }
+
+  function applyFilters() {
+    const search = state.search.trim().toLowerCase();
+    state.filtered = state.rows.filter((r) => {
+      if (search && !String(r.name || "").toLowerCase().includes(search)) return false;
+      if (state.dataType && !splitDataTypes(r.data).includes(state.dataType)) return false;
+      if (state.sensitiveOnly && !r.is_sensitive) return false;
+      return true;
+    });
+    sortRows();
+    state.page = 1;
+    renderTable();
+  }
+
+  function sortRows() {
+    const { sortKey, sortDir } = state;
+    const dir = sortDir === "asc" ? 1 : -1;
+    state.filtered.sort((a, b) => {
+      let av = a[sortKey];
+      let bv = b[sortKey];
+      if (sortKey === "records") {
+        av = Number(av) || 0;
+        bv = Number(bv) || 0;
+      } else if (sortKey === "is_sensitive") {
+        av = av ? 1 : 0;
+        bv = bv ? 1 : 0;
+      } else {
+        av = String(av || "").toLowerCase();
+        bv = String(bv || "").toLowerCase();
+      }
+      if (av < bv) return -1 * dir;
+      if (av > bv) return 1 * dir;
+      return 0;
+    });
+  }
+
+  function renderTable() {
+    const total = state.filtered.length;
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    state.page = Math.min(state.page, totalPages);
+    const start = (state.page - 1) * PAGE_SIZE;
+    const pageRows = state.filtered.slice(start, start + PAGE_SIZE);
+
+    els.tableBody.innerHTML = pageRows.map((r) => `
+      <tr class="${r.is_sensitive ? "sensitive" : ""}">
+        <td class="name">${escapeHtml(r.name || "")}</td>
+        <td>${escapeHtml(r.date || "")}</td>
+        <td>${r.records.toLocaleString()}</td>
+        <td><span class="badge ${r.is_sensitive ? "yes" : "no"}">${r.is_sensitive ? "Yes" : "No"}</span></td>
+        <td>${escapeHtml(r.data || "")}</td>
+        <td class="description">${escapeHtml(r.description || "")}</td>
+      </tr>
+    `).join("");
+
+    els.resultCount.textContent = `${total.toLocaleString()} of ${state.rows.length.toLocaleString()} data wells`;
+    els.pageInfo.textContent = `Page ${state.page} of ${totalPages}`;
+    els.prevPage.disabled = state.page <= 1;
+    els.nextPage.disabled = state.page >= totalPages;
+
+    document.querySelectorAll("th[data-key]").forEach((th) => {
+      th.classList.remove("sorted-asc", "sorted-desc");
+      if (th.dataset.key === state.sortKey) {
+        th.classList.add(state.sortDir === "asc" ? "sorted-asc" : "sorted-desc");
+      }
+    });
+  }
+
+  let searchDebounce;
+  els.searchInput.addEventListener("input", (e) => {
+    clearTimeout(searchDebounce);
+    const value = e.target.value;
+    searchDebounce = setTimeout(() => {
+      state.search = value;
+      applyFilters();
+    }, 150);
+  });
+
+  els.dataTypeFilter.addEventListener("change", (e) => {
+    state.dataType = e.target.value;
+    applyFilters();
+  });
+
+  els.sensitiveOnly.addEventListener("change", (e) => {
+    state.sensitiveOnly = e.target.checked;
+    applyFilters();
+  });
+
+  els.prevPage.addEventListener("click", () => {
+    if (state.page > 1) {
+      state.page -= 1;
+      renderTable();
+    }
+  });
+
+  els.nextPage.addEventListener("click", () => {
+    state.page += 1;
+    renderTable();
+  });
+
+  document.querySelectorAll("th[data-key]").forEach((th) => {
+    th.addEventListener("click", () => {
+      const key = th.dataset.key;
+      if (state.sortKey === key) {
+        state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
+      } else {
+        state.sortKey = key;
+        state.sortDir = key === "records" ? "desc" : "asc";
+      }
+      sortRows();
+      state.page = 1;
+      renderTable();
+    });
+  });
+
+  loadData();
+})();
+</script>
 </body>
 </html>

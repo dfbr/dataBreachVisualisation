@@ -7,7 +7,10 @@ false (or the page comes back empty), then writes every collected record to a
 single local JSON file.
 
 Usage:
-    python fetch_data_wells.py [--output data_wells.json]
+    python fetch_data_wells.py [--output docs/data_wells.json]
+
+The default output path lives under docs/ so the file is served directly by
+GitHub Pages alongside docs/index.html, which loads it via fetch().
 
 Optional auth:
     If DEHASHED_API_KEY is set in the environment, it is sent as the
@@ -21,12 +24,13 @@ import json
 import os
 import sys
 import time
+from pathlib import Path
 from typing import Any
 
 import requests
 
 API_URL = "https://api.dehashed.com/data-wells"
-DEFAULT_OUTPUT = "data_wells.json"
+DEFAULT_OUTPUT = "docs/data_wells.json"
 REQUEST_TIMEOUT = 30
 MAX_RETRIES = 3
 RETRY_BACKOFF_SECONDS = 2
@@ -95,7 +99,9 @@ def main() -> int:
 
     data_wells = fetch_all_data_wells()
 
-    with open(args.output, "w", encoding="utf-8") as f:
+    output_path = Path(args.output)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(output_path, "w", encoding="utf-8") as f:
         json.dump(data_wells, f, ensure_ascii=False, indent=2)
 
     print(f"Saved {len(data_wells)} records to {args.output}")

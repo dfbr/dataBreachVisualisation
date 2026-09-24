@@ -1,6 +1,8 @@
 # dehashed
 
-Fetches all records from the DeHashed `/data-wells` endpoint (with pagination) into a local JSON file.
+Fetches all records from the DeHashed `/data-wells` endpoint (with pagination) into
+`docs/data_wells.json`, and serves them via a static dashboard at `docs/index.html` for
+GitHub Pages.
 
 ## Setup
 
@@ -13,7 +15,7 @@ pip install -r requirements.txt
 ## Usage
 
 ```bash
-python fetch_data_wells.py --output data_wells.json
+python fetch_data_wells.py --output docs/data_wells.json
 ```
 
 Optionally set `DEHASHED_API_KEY` in the environment to authenticate requests:
@@ -25,16 +27,26 @@ python fetch_data_wells.py
 
 ## Dashboard
 
-`generate_report.py` builds a static HTML dashboard from `data_wells.json` and writes it to
-`docs/index.html`, ready for GitHub Pages (configure Pages to publish from the `/docs` folder
-on the `main` branch).
+`docs/index.html` is a static, dependency-free page (Plotly loaded from a CDN) that fetches
+`docs/data_wells.json` at page load and renders it client-side — no build step required.
+Configure GitHub Pages to publish from the `/docs` folder on the `main` branch.
+
+It includes:
+- Summary stats (total data wells, total records exposed, % sensitive)
+- Charts: top breaches by records, breaches/records per year, sensitive vs. non-sensitive
+  split, most common exposed data types
+- A searchable, filterable, sortable, paginated table of every individual breach (name,
+  date, records, sensitivity, exposed data types, description)
+
+Since the dashboard loads `data_wells.json` over `fetch()`, both `docs/index.html` and
+`docs/data_wells.json` are committed to the repo — refreshing the data is just a matter of
+re-running `fetch_data_wells.py` and committing the updated JSON.
+
+To preview locally (fetch() requires http:// rather than file://):
 
 ```bash
-python generate_report.py --input data_wells.json --output docs/index.html
+cd docs && python3 -m http.server 8000
 ```
 
-The dashboard includes: top breaches by records exposed, breaches/records per year, a
-sensitive vs. non-sensitive split, and the most common exposed data types.
+Then open http://localhost:8000.
 
-Unlike `data_wells.json`, `docs/index.html` is committed to the repo since it's what GitHub
-Pages serves.

@@ -3,5 +3,5 @@ __pycache__/
 *.pyc
 *.egg-info/
 .env
-data_wells.json
+/data_wells.json
 .DS_Store
