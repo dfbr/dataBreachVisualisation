@@ -25,18 +25,36 @@ export DEHASHED_API_KEY=your-api-key
 python fetch_data_wells.py
 ```
 
+### Rate limiting
+
+DeHashed doesn't publish a concrete numeric rate limit for the public, unauthenticated
+`/data-wells` endpoint, so the script is conservative by default: it waits at least
+`--min-interval` seconds (default `3.0`) between requests, and if it does get rate limited
+(HTTP 429) it honors the `Retry-After` header, falling back to exponential backoff, rather
+than failing. It's slow by design but should be reliable. Tune with `--min-interval` if
+needed.
+
+### Incremental fetching
+
+Walking all ~1,200 pages every run isn't necessary (and isn't rate-limit-friendly) once the
+local `docs/data_wells.json` is up to date. Before doing a full walk, the script fetches only
+page 1 and compares its `total` count and entries against the existing local file. If they
+match, nothing has changed upstream, so it skips the full re-fetch and leaves the file
+untouched. Otherwise it performs a full walk and rewrites the file. Pass `--force-full` to
+always do a complete walk regardless.
+
 ## Dashboard
 
-`docs/index.html` is a static, dependency-free page (Plotly loaded from a CDN) that fetches
-`docs/data_wells.json` at page load and renders it client-side — no build step required.
-Configure GitHub Pages to publish from the `/docs` folder on the `main` branch.
+`docs/index.html` is a static, dependency-free page that fetches `docs/data_wells.json` at
+page load and renders it client-side — no build step, no external libraries. Configure
+GitHub Pages to publish from the `/docs` folder on the `main` branch.
 
-It includes:
-- Summary stats (total data wells, total records exposed, % sensitive)
-- Charts: top breaches by records, breaches/records per year, sensitive vs. non-sensitive
-  split, most common exposed data types
-- A searchable, filterable, sortable, paginated table of every individual breach (name,
-  date, records, sensitivity, exposed data types, description)
+It's a single searchable, filterable, sortable, paginated table of every individual breach
+(name, date, records, sensitivity, exposed data types, description), with:
+- Free-text search by name
+- A multi-select data-type filter (e.g. show breaches exposing `email` and/or `password`)
+- A sensitive-only toggle
+- Live totals (breach count and total records) for whatever is currently filtered
 
 Since the dashboard loads `data_wells.json` over `fetch()`, both `docs/index.html` and
 `docs/data_wells.json` are committed to the repo — refreshing the data is just a matter of

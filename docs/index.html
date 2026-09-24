@@ -2,27 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>DeHashed Data Wells Dashboard</title>
+<title>DeHashed Data Wells</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 <style>
   :root { color-scheme: light; }
   body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; margin: 0; padding: 0 20px 40px; background: #f7f7f9; color: #222; }
   h1 { padding-top: 30px; margin-bottom: 4px; }
   .generated { color: #888; font-size: 13px; margin-top: 0; }
-  .summary { display: flex; gap: 30px; flex-wrap: wrap; margin: 20px 0; }
-  .stat { background: white; border-radius: 8px; padding: 16px 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  .stat .value { display: block; font-size: 28px; font-weight: 700; }
-  .stat .label { display: block; font-size: 13px; color: #666; }
-  .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 20px; margin-bottom: 30px; }
-  .chart { background: white; border-radius: 8px; padding: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  .chart.wide { grid-column: 1 / -1; }
   section.table-section { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  .controls { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
-  .controls input[type="text"] { padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; min-width: 220px; }
-  .controls select { padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; }
-  .controls label.checkbox { display: flex; align-items: center; gap: 6px; font-size: 14px; }
-  .controls .count { margin-left: auto; font-size: 13px; color: #666; }
+  .controls { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; margin-bottom: 12px; }
+  .controls input[type="text"] { padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; min-width: 220px; height: 36px; box-sizing: border-box; }
+  .controls label.checkbox { display: flex; align-items: center; gap: 6px; font-size: 14px; height: 36px; }
+  .multiselect { position: relative; }
+  .multiselect-button { padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; background: white; cursor: pointer; font-size: 14px; height: 36px; min-width: 180px; text-align: left; }
+  .multiselect-panel { display: none; position: absolute; z-index: 10; top: 40px; left: 0; background: white; border: 1px solid #ccc; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); max-height: 320px; overflow: auto; min-width: 260px; padding: 8px; }
+  .multiselect.open .multiselect-panel { display: block; }
+  .multiselect-panel label { display: flex; align-items: center; gap: 8px; padding: 4px 6px; font-size: 13px; border-radius: 4px; cursor: pointer; }
+  .multiselect-panel label:hover { background: #f2f2f2; }
+  .multiselect-panel .actions { display: flex; justify-content: space-between; padding: 4px 6px 8px; border-bottom: 1px solid #eee; margin-bottom: 6px; }
+  .multiselect-panel .actions button { font-size: 12px; background: none; border: none; color: #1565c0; cursor: pointer; padding: 0; }
+  .live-totals { display: flex; gap: 24px; flex-wrap: wrap; margin-left: auto; align-items: center; }
+  .live-totals .stat { text-align: right; }
+  .live-totals .value { display: block; font-size: 20px; font-weight: 700; }
+  .live-totals .label { display: block; font-size: 12px; color: #666; }
   table { border-collapse: collapse; width: 100%; font-size: 14px; }
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #eee; vertical-align: top; }
   th { cursor: pointer; user-select: none; white-space: nowrap; background: #fafafa; position: sticky; top: 0; }
@@ -42,29 +44,33 @@
 </style>
 </head>
 <body>
-<h1>DeHashed Data Wells Dashboard</h1>
+<h1>DeHashed Data Wells</h1>
 <p class="generated" id="generated-note">Loading data_wells.json&hellip;</p>
 
 <div id="app">
   <div class="status" id="status">Loading&hellip;</div>
 
-  <div class="summary" id="summary" hidden></div>
-
-  <div class="charts" id="charts" hidden>
-    <div class="chart wide" id="chart-timeline"></div>
-    <div class="chart" id="chart-top-breaches"></div>
-    <div class="chart" id="chart-sensitivity"></div>
-    <div class="chart wide" id="chart-data-types"></div>
-  </div>
-
   <section class="table-section" id="table-section" hidden>
     <div class="controls">
       <input type="text" id="search-input" placeholder="Search by breach name&hellip;">
-      <select id="data-type-filter">
-        <option value="">All data types</option>
-      </select>
+
+      <div class="multiselect" id="data-type-multiselect">
+        <button type="button" class="multiselect-button" id="data-type-button">All data types</button>
+        <div class="multiselect-panel" id="data-type-panel">
+          <div class="actions">
+            <button type="button" id="data-type-select-all">Select all</button>
+            <button type="button" id="data-type-clear">Clear</button>
+          </div>
+          <div id="data-type-options"></div>
+        </div>
+      </div>
+
       <label class="checkbox"><input type="checkbox" id="sensitive-only"> Sensitive only</label>
-      <span class="count" id="result-count"></span>
+
+      <div class="live-totals">
+        <div class="stat"><span class="value" id="filtered-count">0</span><span class="label">Breaches (filtered)</span></div>
+        <div class="stat"><span class="value" id="filtered-records">0</span><span class="label">Records (filtered)</span></div>
+      </div>
     </div>
     <div class="table-wrap">
       <table id="breaches-table">
@@ -103,24 +109,28 @@
     sortDir: "desc",
     page: 1,
     search: "",
-    dataType: "",
+    dataTypes: new Set(), // empty set = no filter (all types)
     sensitiveOnly: false,
   };
 
   const els = {
     status: document.getElementById("status"),
-    summary: document.getElementById("summary"),
-    charts: document.getElementById("charts"),
     tableSection: document.getElementById("table-section"),
     tableBody: document.getElementById("table-body"),
-    resultCount: document.getElementById("result-count"),
     searchInput: document.getElementById("search-input"),
-    dataTypeFilter: document.getElementById("data-type-filter"),
     sensitiveOnly: document.getElementById("sensitive-only"),
     prevPage: document.getElementById("prev-page"),
     nextPage: document.getElementById("next-page"),
     pageInfo: document.getElementById("page-info"),
     generatedNote: document.getElementById("generated-note"),
+    filteredCount: document.getElementById("filtered-count"),
+    filteredRecords: document.getElementById("filtered-records"),
+    dataTypeMultiselect: document.getElementById("data-type-multiselect"),
+    dataTypeButton: document.getElementById("data-type-button"),
+    dataTypePanel: document.getElementById("data-type-panel"),
+    dataTypeOptions: document.getElementById("data-type-options"),
+    dataTypeSelectAll: document.getElementById("data-type-select-all"),
+    dataTypeClear: document.getElementById("data-type-clear"),
   };
 
   function escapeHtml(value) {
@@ -147,7 +157,6 @@
           ...row,
           records: Number(row.records) || 0,
           is_sensitive: Boolean(row.is_sensitive),
-          _year: (row.date && row.date.slice(0, 4)) || null,
         }));
         onDataLoaded();
       })
@@ -158,133 +167,81 @@
 
   function onDataLoaded() {
     els.status.hidden = true;
-    els.summary.hidden = false;
-    els.charts.hidden = false;
     els.tableSection.hidden = false;
     els.generatedNote.textContent = `Loaded ${state.rows.length.toLocaleString()} data wells`;
 
-    renderSummary();
-    renderCharts();
-    populateDataTypeFilter();
+    populateDataTypeOptions();
     applyFilters();
   }
 
-  function renderSummary() {
-    const totalBreaches = state.rows.length;
-    const totalRecords = state.rows.reduce((sum, r) => sum + r.records, 0);
-    const sensitiveCount = state.rows.filter((r) => r.is_sensitive).length;
-    const sensitivePct = totalBreaches ? (100 * sensitiveCount) / totalBreaches : 0;
-
-    els.summary.innerHTML = `
-      <div class="stat"><span class="value">${totalBreaches.toLocaleString()}</span><span class="label">Data Wells</span></div>
-      <div class="stat"><span class="value">${totalRecords.toLocaleString()}</span><span class="label">Total Records Exposed</span></div>
-      <div class="stat"><span class="value">${sensitivePct.toFixed(1)}%</span><span class="label">Marked Sensitive</span></div>
-    `;
-  }
-
-  function renderCharts() {
-    const config = { displaylogo: false, responsive: true };
-
-    // Top 20 breaches by records
-    const top = [...state.rows].sort((a, b) => b.records - a.records).slice(0, 20).reverse();
-    Plotly.newPlot(
-      "chart-top-breaches",
-      [{
-        type: "bar",
-        orientation: "h",
-        x: top.map((r) => r.records),
-        y: top.map((r) => r.name),
-        marker: { color: top.map((r) => (r.is_sensitive ? "#d62728" : "#1f77b4")) },
-        text: top.map((r) => r.records.toLocaleString()),
-        textposition: "outside",
-      }],
-      { title: "Top 20 Breaches by Records Exposed", margin: { l: 10, r: 10, t: 50, b: 10 }, height: 650 },
-      config
-    );
-
-    // Breaches & records per year
-    const byYear = new Map();
-    for (const r of state.rows) {
-      if (!r._year) continue;
-      const entry = byYear.get(r._year) || { breaches: 0, records: 0 };
-      entry.breaches += 1;
-      entry.records += r.records;
-      byYear.set(r._year, entry);
-    }
-    const years = [...byYear.keys()].sort();
-    Plotly.newPlot(
-      "chart-timeline",
-      [
-        { type: "bar", name: "Breach Count", x: years, y: years.map((y) => byYear.get(y).breaches), marker: { color: "#1f77b4" } },
-        { type: "scatter", mode: "lines+markers", name: "Records Exposed", x: years, y: years.map((y) => byYear.get(y).records), yaxis: "y2", marker: { color: "#d62728" } },
-      ],
-      {
-        title: "Breaches and Records Exposed by Year",
-        margin: { l: 10, r: 10, t: 50, b: 10 },
-        height: 420,
-        yaxis: { title: "Breach Count" },
-        yaxis2: { title: "Records Exposed", overlaying: "y", side: "right" },
-      },
-      config
-    );
-
-    // Sensitivity split
-    const sensitiveCount = state.rows.filter((r) => r.is_sensitive).length;
-    const notSensitiveCount = state.rows.length - sensitiveCount;
-    Plotly.newPlot(
-      "chart-sensitivity",
-      [{
-        type: "pie",
-        labels: ["Sensitive", "Not Sensitive"],
-        values: [sensitiveCount, notSensitiveCount],
-        marker: { colors: ["#d62728", "#1f77b4"] },
-        hole: 0.4,
-      }],
-      { title: "Sensitive vs. Non-Sensitive Breaches", margin: { l: 10, r: 10, t: 50, b: 10 }, height: 420 },
-      config
-    );
-
-    // Most common exposed data types
-    const counts = new Map();
-    for (const r of state.rows) {
-      for (const field of splitDataTypes(r.data)) {
-        counts.set(field, (counts.get(field) || 0) + 1);
-      }
-    }
-    const topTypes = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20).reverse();
-    Plotly.newPlot(
-      "chart-data-types",
-      [{
-        type: "bar",
-        orientation: "h",
-        x: topTypes.map(([, count]) => count),
-        y: topTypes.map(([label]) => label),
-        marker: { color: "#2ca02c" },
-      }],
-      { title: "Most Common Exposed Data Types (Top 20)", margin: { l: 10, r: 10, t: 50, b: 10 }, height: 650 },
-      config
-    );
-  }
-
-  function populateDataTypeFilter() {
+  function populateDataTypeOptions() {
     const types = new Set();
     for (const r of state.rows) {
       for (const field of splitDataTypes(r.data)) types.add(field);
     }
     const sorted = [...types].sort((a, b) => a.localeCompare(b));
-    for (const type of sorted) {
-      const opt = document.createElement("option");
-      opt.value = type;
-      opt.textContent = type;
-      els.dataTypeFilter.appendChild(opt);
+
+    els.dataTypeOptions.innerHTML = sorted.map((type) => `
+      <label><input type="checkbox" value="${escapeHtml(type)}"> ${escapeHtml(type)}</label>
+    `).join("");
+
+    els.dataTypeOptions.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+      cb.addEventListener("change", () => {
+        if (cb.checked) state.dataTypes.add(cb.value);
+        else state.dataTypes.delete(cb.value);
+        updateDataTypeButtonLabel();
+        applyFilters();
+      });
+    });
+  }
+
+  function updateDataTypeButtonLabel() {
+    if (state.dataTypes.size === 0) {
+      els.dataTypeButton.textContent = "All data types";
+    } else if (state.dataTypes.size === 1) {
+      els.dataTypeButton.textContent = [...state.dataTypes][0];
+    } else {
+      els.dataTypeButton.textContent = `${state.dataTypes.size} data types selected`;
     }
   }
+
+  els.dataTypeButton.addEventListener("click", () => {
+    els.dataTypeMultiselect.classList.toggle("open");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!els.dataTypeMultiselect.contains(e.target)) {
+      els.dataTypeMultiselect.classList.remove("open");
+    }
+  });
+
+  els.dataTypeSelectAll.addEventListener("click", () => {
+    els.dataTypeOptions.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+      cb.checked = true;
+      state.dataTypes.add(cb.value);
+    });
+    updateDataTypeButtonLabel();
+    applyFilters();
+  });
+
+  els.dataTypeClear.addEventListener("click", () => {
+    els.dataTypeOptions.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+      cb.checked = false;
+    });
+    state.dataTypes.clear();
+    updateDataTypeButtonLabel();
+    applyFilters();
+  });
 
   function applyFilters() {
     const search = state.search.trim().toLowerCase();
     state.filtered = state.rows.filter((r) => {
       if (search && !String(r.name || "").toLowerCase().includes(search)) return false;
-      if (state.dataType && !splitDataTypes(r.data).includes(state.dataType)) return false;
+      if (state.dataTypes.size > 0) {
+        const rowTypes = splitDataTypes(r.data);
+        const matchesAny = rowTypes.some((t) => state.dataTypes.has(t));
+        if (!matchesAny) return false;
+      }
       if (state.sensitiveOnly && !r.is_sensitive) return false;
       return true;
     });
@@ -333,7 +290,9 @@
       </tr>
     `).join("");
 
-    els.resultCount.textContent = `${total.toLocaleString()} of ${state.rows.length.toLocaleString()} data wells`;
+    const filteredRecords = state.filtered.reduce((sum, r) => sum + r.records, 0);
+    els.filteredCount.textContent = total.toLocaleString();
+    els.filteredRecords.textContent = filteredRecords.toLocaleString();
     els.pageInfo.textContent = `Page ${state.page} of ${totalPages}`;
     els.prevPage.disabled = state.page <= 1;
     els.nextPage.disabled = state.page >= totalPages;
@@ -354,11 +313,6 @@
       state.search = value;
       applyFilters();
     }, 150);
-  });
-
-  els.dataTypeFilter.addEventListener("change", (e) => {
-    state.dataType = e.target.value;
-    applyFilters();
   });
 
   els.sensitiveOnly.addEventListener("change", (e) => {
