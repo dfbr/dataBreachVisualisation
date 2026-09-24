@@ -1,0 +1,80 @@
+name: Update data wells
+
+on:
+  schedule:
+    - cron: "17 6 * * *" # daily, ~06:17 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Snapshot previous data
+        run: cp docs/data_wells.json /tmp/old_data_wells.json
+
+      - name: Fetch latest data wells
+        env:
+          DEHASHED_API_KEY: ${{ secrets.DEHASHED_API_KEY }}
+        run: python fetch_data_wells.py --output docs/data_wells.json
+
+      - name: Detect newly added breaches
+        run: |
+          python scripts/detect_new_wells.py \
+            --old /tmp/old_data_wells.json \
+            --new docs/data_wells.json \
+            --output /tmp/new_wells.json
+          echo "count=$(python -c "import json; print(len(json.load(open('/tmp/new_wells.json'))))")" >> "$GITHUB_OUTPUT"
+        id: diff
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data_wells.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update data_wells.json ($(date -u +%Y-%m-%d))"
+            git push
+          else
+            echo "No data changes to commit."
+          fi
+
+      - name: Open issue for new breaches
+        if: steps.diff.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY' > /tmp/issue_body.md
+          import json
+
+          wells = json.load(open("/tmp/new_wells.json"))
+          lines = [f"{len(wells)} new data well(s) detected in the DeHashed feed:", ""]
+          for w in wells:
+              records = w.get("records")
+              records_str = f"{records:,}" if isinstance(records, int) else "unknown"
+              sensitive = " ⚠️ sensitive" if w.get("is_sensitive") else ""
+              lines.append(f"- **{w.get('name')}** — {w.get('date')} — {records_str} records{sensitive}")
+              if w.get("data"):
+                  lines.append(f"  - Exposed: {w['data']}")
+          lines.append("")
+          lines.append("See the full dashboard: https://dfbr.github.io/dataBreachVisualisation/")
+          print("\n".join(lines))
+          PY
+          gh issue create \
+            --title "$(python -c "import json;print(len(json.load(open('/tmp/new_wells.json'))))") new data well(s) detected" \
+            --body-file /tmp/issue_body.md \
+            --label "new-breach"
