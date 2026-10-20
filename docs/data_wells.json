@@ -26894,7 +26894,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "testbag.com (Cit0day)",
-    "records": 248966,
+    "records": 119956,
     "is_sensitive": false
   },
   {
@@ -26903,7 +26903,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "testbag.com (Cit0day)",
-    "records": 119956,
+    "records": 248966,
     "is_sensitive": false
   },
   {
@@ -59736,34 +59736,34 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "pts-pts.info (Cit0day)",
+    "records": 26165,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "pts-pts.info (Cit0day)",
+    "records": 26165,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "pts-pts.info (Cit0day)",
+    "records": 26165,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "pts-pts.info (Cit0day)",
     "records": 11331,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "pts-pts.info (Cit0day)",
-    "records": 26165,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "pts-pts.info (Cit0day)",
-    "records": 26165,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "pts-pts.info (Cit0day)",
-    "records": 26165,
     "is_sensitive": false
   },
   {
@@ -61538,7 +61538,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "prodimar.ro (Cit0day)",
-    "records": 4245,
+    "records": 1527,
     "is_sensitive": false
   },
   {
@@ -61547,7 +61547,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "prodimar.ro (Cit0day)",
-    "records": 1527,
+    "records": 4245,
     "is_sensitive": false
   },
   {
@@ -66060,6 +66060,16 @@
     "name": "pippcity.com (Cit0day)",
     "records": 16404,
     "is_sensitive": false
+  },
+  {
+    "data": "address_street_number_name, address_street_two, address_city, company, address_country, name_first, name_last, name_full, phone_number, address_state, address_zip, email",
+    "date": "2024-03-02",
+    "description": "In March 2024, PipingRock.com, a global vitamin and supplement manufacturer, suffered a data breach that exposed sensitive information belonging to over 2.1 million customers. The compromised data included unique email addresses, full names, phone numbers, and physical addresses. This incident resulted in the public release of substantial amounts of customer data, affecting their privacy and confidentiality.",
+    "image": null,
+    "name": "PipingRock.com",
+    "records": 2107219,
+    "is_sensitive": false,
+    "insights": "pipingrock-data-breach-2024-march"
   },
   {
     "data": "email, password",
@@ -74186,7 +74196,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "ommall.net (Cit0day)",
-    "records": 74476,
+    "records": 108009,
     "is_sensitive": false
   },
   {
@@ -74195,7 +74205,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "ommall.net (Cit0day)",
-    "records": 108009,
+    "records": 74476,
     "is_sensitive": false
   },
   {
@@ -84384,7 +84394,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, password, phone_number",
+    "data": "email, password",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -84393,7 +84403,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, password",
+    "data": "email, password, phone_number",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -86477,7 +86487,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, hashed_password, hashed_password_salt_only",
+    "data": "email, hashed_password_with_salt, hashed_password",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -86486,7 +86496,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, hashed_password_with_salt, hashed_password",
+    "data": "email, hashed_password, hashed_password_salt_only",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -87989,7 +87999,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "mldgo.com (Cit0day)",
-    "records": 6092,
+    "records": 10575,
     "is_sensitive": false
   },
   {
@@ -87998,7 +88008,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "mldgo.com (Cit0day)",
-    "records": 10575,
+    "records": 6092,
     "is_sensitive": false
   },
   {
@@ -88187,7 +88197,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "mivideocristiano.com (Cit0day)",
-    "records": 9114,
+    "records": 11021,
     "is_sensitive": false
   },
   {
@@ -88196,7 +88206,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "mivideocristiano.com (Cit0day)",
-    "records": 11021,
+    "records": 9114,
     "is_sensitive": false
   },
   {
@@ -89899,25 +89909,25 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "michelvaillant.com (Cit0day)",
+    "records": 7323,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "michelvaillant.com (Cit0day)",
+    "records": 7323,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "michelvaillant.com (Cit0day)",
     "records": 12741,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "michelvaillant.com (Cit0day)",
-    "records": 7323,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "michelvaillant.com (Cit0day)",
-    "records": 7323,
     "is_sensitive": false
   },
   {
@@ -97723,7 +97733,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, hashed_password, hashed_password_salt_only, password",
+    "data": "email, password, hashed_password, hashed_password_salt_only",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -97732,7 +97742,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, password, hashed_password, hashed_password_salt_only",
+    "data": "email, hashed_password, hashed_password_salt_only, password",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -114636,25 +114646,25 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "jiangsu.net (Cit0day)",
+    "records": 23820,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "jiangsu.net (Cit0day)",
+    "records": 23820,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "jiangsu.net (Cit0day)",
     "records": 5496,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "jiangsu.net (Cit0day)",
-    "records": 23820,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "jiangsu.net (Cit0day)",
-    "records": 23820,
     "is_sensitive": false
   },
   {
@@ -116570,7 +116580,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, hashed_password, hashed_password_salt_only, password",
+    "data": "email, password, hashed_password",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -116579,7 +116589,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, password, hashed_password",
+    "data": "email, hashed_password, hashed_password_salt_only, password",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -120008,7 +120018,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "innolife.net (Cit0day)",
-    "records": 1093439,
+    "records": 470224,
     "is_sensitive": false
   },
   {
@@ -120017,7 +120027,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "innolife.net (Cit0day)",
-    "records": 470224,
+    "records": 1093439,
     "is_sensitive": false
   },
   {
@@ -123475,7 +123485,7 @@
   {
     "data": "username, email, ip_address, hashed_password_with_salt",
     "date": "2019-12-01",
-    "description": "In December 2019, IDC Games suffered a data breach where approximately 4 million records were leaked. The breach exposed usernames, email addresses, and IP addresses, as well as passwords stored as salted MD5 hashes.",
+    "description": "In December 2019, a security breach at forums.idcgames.com led to the unauthorized disclosure of the IDC Games database. The breach involved the compromise of over 4 million records, which included usernames, email addresses, IP addresses, and passwords stored as salted MD5 hashes.",
     "image": null,
     "name": "IDC Games",
     "records": 4003148,
@@ -128881,7 +128891,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, password, hashed_password, hashed_password_salt_only",
+    "data": "email, hashed_password, hashed_password_salt_only, password",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -128890,7 +128900,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, hashed_password, hashed_password_salt_only, password",
+    "data": "email, password, hashed_password, hashed_password_salt_only",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -139491,33 +139501,6 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "gameonmanager.com (Cit0day)",
-    "records": 17438,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "gameonmanager.com (Cit0day)",
-    "records": 17438,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "gameonmanager.com (Cit0day)",
-    "records": 17438,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "gameonmanager.com (Cit0day)",
     "records": 6933,
     "is_sensitive": false
   },
@@ -139536,7 +139519,34 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "gameonmanager.com (Cit0day)",
-    "records": 6933,
+    "records": 17438,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "gameonmanager.com (Cit0day)",
+    "records": 17438,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "gameonmanager.com (Cit0day)",
+    "records": 17438,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "gameonmanager.com (Cit0day)",
+    "records": 17438,
     "is_sensitive": false
   },
   {
@@ -146081,15 +146091,6 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "fineaw.com (Cit0day)",
-    "records": 2594,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "fineaw.com (Cit0day)",
     "records": 2982,
     "is_sensitive": false
   },
@@ -146100,6 +146101,15 @@
     "image": null,
     "name": "fineaw.com (Cit0day)",
     "records": 3458,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "fineaw.com (Cit0day)",
+    "records": 2594,
     "is_sensitive": false
   },
   {
@@ -151559,7 +151569,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, hashed_password, hashed_password_salt_only, hashed_password_with_salt",
+    "data": "email, hashed_password, hashed_password_salt_only",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -151568,7 +151578,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, hashed_password, hashed_password_salt_only",
+    "data": "email, hashed_password, hashed_password_salt_only, hashed_password_with_salt",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -152385,34 +152395,34 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "escrivaworks.org (Cit0day)",
-    "records": 22543,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "escrivaworks.org (Cit0day)",
-    "records": 22543,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "escrivaworks.org (Cit0day)",
-    "records": 22543,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "escrivaworks.org (Cit0day)",
     "records": 24673,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "escrivaworks.org (Cit0day)",
+    "records": 22543,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "escrivaworks.org (Cit0day)",
+    "records": 22543,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "escrivaworks.org (Cit0day)",
+    "records": 22543,
     "is_sensitive": false
   },
   {
@@ -154834,7 +154844,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "embroiderersguild.com (Cit0day)",
-    "records": 9248,
+    "records": 12487,
     "is_sensitive": false
   },
   {
@@ -154843,7 +154853,7 @@
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
     "name": "embroiderersguild.com (Cit0day)",
-    "records": 12487,
+    "records": 9248,
     "is_sensitive": false
   },
   {
@@ -175676,6 +175686,51 @@
     "is_sensitive": false
   },
   {
+    "data": "email, password, hashed_password_with_salt",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "clubkledingwinkel.nl (Cit0day)",
+    "records": 3006,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password, hashed_password_with_salt",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "clubkledingwinkel.nl (Cit0day)",
+    "records": 3006,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password, hashed_password_with_salt",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "clubkledingwinkel.nl (Cit0day)",
+    "records": 3006,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password, hashed_password_with_salt",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "clubkledingwinkel.nl (Cit0day)",
+    "records": 3006,
+    "is_sensitive": false
+  },
+  {
+    "data": "email, password, hashed_password_with_salt",
+    "date": "2020-11-04",
+    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
+    "image": null,
+    "name": "clubkledingwinkel.nl (Cit0day)",
+    "records": 3006,
+    "is_sensitive": false
+  },
+  {
     "data": "email, hashed_password, password",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
@@ -175691,51 +175746,6 @@
     "image": null,
     "name": "clubkledingwinkel.nl (Cit0day)",
     "records": 3052,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password, hashed_password_with_salt",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "clubkledingwinkel.nl (Cit0day)",
-    "records": 3006,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password, hashed_password_with_salt",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "clubkledingwinkel.nl (Cit0day)",
-    "records": 3006,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password, hashed_password_with_salt",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "clubkledingwinkel.nl (Cit0day)",
-    "records": 3006,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password, hashed_password_with_salt",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "clubkledingwinkel.nl (Cit0day)",
-    "records": 3006,
-    "is_sensitive": false
-  },
-  {
-    "data": "email, password, hashed_password_with_salt",
-    "date": "2020-11-04",
-    "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
-    "image": null,
-    "name": "clubkledingwinkel.nl (Cit0day)",
-    "records": 3006,
     "is_sensitive": false
   },
   {
@@ -192889,7 +192899,7 @@
     "is_sensitive": false
   },
   {
-    "data": "username, email, password",
+    "data": "email, password, username",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -193366,7 +193376,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, hashed_password, hashed_password_salt_only",
+    "data": "email, hashed_password_salt_only, hashed_password",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -193375,7 +193385,7 @@
     "is_sensitive": false
   },
   {
-    "data": "email, hashed_password_salt_only, hashed_password",
+    "data": "email, hashed_password, hashed_password_salt_only",
     "date": "2020-11-04",
     "description": "This breach is a part of the Cit0day breach collection. In November 2020, a collection of more than 23,000 allegedly breached websites known as Cit0day were made available for download on several hacking forums. The data consisted of 226M unique email address alongside password pairs, often represented as both password hashes and the cracked, plain text versions. Independent verification of the data established it contains many legitimate, previously undisclosed breaches.",
     "image": null,
@@ -206936,6 +206946,16 @@
     "name": "alm-evreux-basket.com (Cit0day)",
     "records": 942,
     "is_sensitive": false
+  },
+  {
+    "data": "birthdate_full, name_full, company",
+    "date": "2024-01-01",
+    "description": "In 2024, a significant data breach involving the French third-party health-payment operator, Almerys, was reported. The incident involved the exposure of over 33 million records containing sensitive personal information. The compromised data included full names, birth dates, social security numbers, health insurer names, and contract details.",
+    "image": null,
+    "name": "Almerys",
+    "records": 33074784,
+    "is_sensitive": false,
+    "insights": "almerys-data-breach-2024-01"
   },
   {
     "data": "email, password",
